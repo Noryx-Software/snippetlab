@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "author": "NORYX SOFTWARE",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "dependencies": {
     "@astrojs/react": "^4.4.2",
     "@fontsource-variable/familjen-grotesk": "^5.3.0",

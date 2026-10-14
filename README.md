@@ -59,7 +59,3 @@ If a flavour needs a language highlight.js does not have registered yet, add it 
 | Vanilla JS, React, Vue | Tested in Chromium. Canvas 2D, so it runs in Safari and Firefox too. |
 | Flutter | Beta. Fragment shader, Flutter 3.27+. Not compiled in CI yet. |
 | SwiftUI | Beta. Metal `layerEffect`, iOS 17+ / macOS 14+. Not compiled in CI yet. |
-
-## Licence
-
-MIT. See [LICENSE](LICENSE). Generated code carries the same licence.
