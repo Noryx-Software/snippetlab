@@ -59,3 +59,9 @@ If a flavour needs a language highlight.js does not have registered yet, add it 
 | Vanilla JS, React, Vue | Tested in Chromium. Canvas 2D, so it runs in Safari and Firefox too. |
 | Flutter | Beta. Fragment shader, Flutter 3.27+. Not compiled in CI yet. |
 | SwiftUI | Beta. Metal `layerEffect`, iOS 17+ / macOS 14+. Not compiled in CI yet. |
+
+## Licence
+
+MIT, copyright NORYX SOFTWARE. See [LICENSE](LICENSE).
+
+The code Snippetlab generates is MIT licensed too. Each generated file starts with a one-line copyright and licence notice; keep that line when you use the code.

@@ -1,5 +1,7 @@
 /**
- * Liquid Glass — Snippetlab by NORYX SOFTWARE (MIT)
+ * Liquid Glass — Snippetlab by NORYX SOFTWARE
+ * Copyright (c) 2026 NORYX SOFTWARE. Released under the MIT License:
+ * https://opensource.org/licenses/MIT
  *
  * Refracts an image under a rounded card, like Apple's Liquid Glass.
  * The card holds a <canvas>; every pixel copies the photo from a position
