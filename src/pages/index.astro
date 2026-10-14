@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+import { catalogue } from '../effects/catalogue';
+import { FLAVOURS } from '../lib/types';
+
+const label = (id: string) => FLAVOURS.find((f) => f.id === id)?.label ?? id;
+const live = catalogue.filter((e) => e.status === 'live');
+const planned = catalogue.filter((e) => e.status === 'planned');
+---
+<Base title="Snippetlab by NORYX SOFTWARE">
+  <section class="hero wrap">
+    <div class="hero-text">
+      <p class="eyebrow">Effects, tuned and ready to ship</p>
+      <h1>Tune an effect.<br />Take the code.</h1>
+      <p class="lede">
+        Snippetlab turns polished interface effects into code for the stack you already use.
+        Adjust the effect on a live preview, then copy the files.
+      </p>
+      <ul class="stack" aria-label="Supported frameworks">
+        {FLAVOURS.map((f) => <li>{f.label}</li>)}
+      </ul>
+      <a class="cta" href="/effects/liquid-glass">Open Liquid Glass</a>
+    </div>
+
+    <a class="specimen" href="/effects/liquid-glass" aria-label="Liquid Glass effect">
+      <div class="specimen-glass">
+        <span class="specimen-value">$1.3M</span>
+        <span class="specimen-label">Saved annually from reduced risk exposure</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="wrap catalogue" id="catalogue">
+    <div class="cat-head">
+      <h2>Effects</h2>
+      <p>{live.length} live, {planned.length} in the queue.</p>
+    </div>
+
+    <ul class="grid">
+      {live.map((e) => (
+        <li class="entry live-entry">
+          <a href={`/effects/${e.slug}`}>
+            <div class="entry-top">
+              <span class="eyebrow">{e.category}</span>
+              <span class="chip live">Live</span>
+            </div>
+            <h3>{e.name}</h3>
+            <p>{e.summary}</p>
+            <p class="flv">{e.flavours.map(label).join(' · ')}</p>
+          </a>
+        </li>
+      ))}
+      {planned.map((e) => (
+        <li class="entry">
+          <div class="entry-top">
+            <span class="eyebrow">{e.category}</span>
+            <span class="chip">Planned</span>
+          </div>
+          <h3>{e.name}</h3>
+          <p>{e.summary}</p>
+          <p class="flv">{e.library ? `${e.library} · ` : ''}{e.flavours.map(label).join(' · ')}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; padding-block: clamp(40px, 8vw, 96px) 56px; }
+  @media (max-width: 820px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+  .hero-text { display: flex; flex-direction: column; gap: 20px; align-items: flex-start; }
+  h1 { font-size: clamp(44px, 7.4vw, 92px); font-weight: 700; letter-spacing: -0.035em; line-height: .95; }
+  .lede { font-size: 18.5px; color: var(--muted); max-width: 52ch; margin: 0; }
+  .stack { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .stack li { font: 13px var(--mono); padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+  .cta { display: inline-block; text-decoration: none; background: var(--accent); color: var(--accent-fg); font-weight: 500; padding: 13px 20px; border-radius: 9px; margin-top: 6px; }
+  .cta:hover { filter: brightness(1.08); }
+
+  /* Specimen: a live CSS glass card over hard-edged stripes */
+  .specimen {
+    position: relative; display: block; aspect-ratio: 4 / 5; max-width: 100%; border-radius: 14px; overflow: hidden; text-decoration: none;
+    background:
+      radial-gradient(circle at 70% 28%, #f6d6b8 0 13%, transparent 13.5%),
+      repeating-linear-gradient(90deg, #1f2bb8 0 22px, #e9ecff 22px 44px, #ff5a7a 44px 52px, #e9ecff 52px 74px);
+  }
+  .specimen-glass {
+    position: absolute; left: 7%; right: 7%; bottom: 7%; padding: 22px 24px; border-radius: 16px; color: #fff;
+    display: flex; flex-direction: column; gap: 6px;
+    background: linear-gradient(180deg, rgba(14,17,40,.5), rgba(14,17,40,.28));
+    -webkit-backdrop-filter: blur(10px) saturate(1.3); backdrop-filter: blur(10px) saturate(1.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 0 rgba(255,255,255,.25), 0 10px 28px rgba(0,0,0,.3);
+    transition: transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .specimen:hover .specimen-glass { transform: translateY(-8px); }
+  .specimen-value { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 5vw, 48px); line-height: 1; }
+  .specimen-label { font-size: 16px; font-weight: 400; line-height: 1.25; }
+
+  .catalogue { display: flex; flex-direction: column; gap: 24px; }
+  .cat-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 28px; }
+  .cat-head h2 { font-size: 32px; font-weight: 600; }
+  .cat-head p { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 13px; }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .entry { border: 1px solid var(--line); border-radius: var(--radius); background: transparent; min-width: 0; }
+  .entry > a, .entry:not(.live-entry) { display: flex; flex-direction: column; gap: 10px; padding: 20px; height: 100%; text-decoration: none; }
+  .entry:not(.live-entry) { color: var(--muted); }
+  .live-entry { background: var(--surface); border-color: var(--accent); }
+  .live-entry:hover { box-shadow: 0 0 0 1px var(--accent); }
+  .entry-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .entry h3 { font-size: 22px; font-weight: 600; color: var(--fg); }
+  .entry:not(.live-entry) h3 { color: var(--muted); }
+  .entry p { margin: 0; font-size: 14.5px; }
+  .live-entry p { color: var(--muted); }
+  .flv { font: 12px var(--mono) !important; margin-top: auto !important; padding-top: 6px; }
+</style>

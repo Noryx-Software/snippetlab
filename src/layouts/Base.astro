@@ -1,0 +1,58 @@
+---
+import '@fontsource-variable/familjen-grotesk';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '../styles/global.css';
+
+interface Props { title: string; description?: string }
+const { title, description = 'Tune polished UI effects and take the code for Vanilla JS, React, Vue, Flutter and SwiftUI.' } = Astro.props;
+const repo = 'https://github.com/michaelnejara/snippetlab';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="wrap bar">
+        <a class="brand" href="/">
+          <span class="word">Snippetlab</span>
+          <span class="by">by NORYX SOFTWARE</span>
+        </a>
+        <nav aria-label="Main">
+          <a href="/#catalogue">Effects</a>
+          <a href={repo}>GitHub</a>
+        </nav>
+      </div>
+      <div class="fringe" aria-hidden="true"></div>
+    </header>
+    <main><slot /></main>
+    <footer class="site-foot">
+      <div class="wrap foot">
+        <span>Snippetlab by NORYX SOFTWARE</span>
+        <span>Generated code is MIT licensed. Use it anywhere.</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-head { background: var(--bg); position: sticky; top: 0; z-index: 10; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; flex-wrap: wrap; }
+  .word { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+  .by { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
+  nav { display: flex; gap: 20px; font-size: 15px; }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover { color: var(--fg); }
+  .site-foot { border-top: 1px solid var(--line); margin-top: 96px; }
+  .foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 24px; font-size: 13.5px; color: var(--muted); }
+</style>

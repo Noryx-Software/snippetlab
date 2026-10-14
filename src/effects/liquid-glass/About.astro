@@ -1,0 +1,41 @@
+<section class="about" aria-labelledby="how">
+  <h2 id="how">How it works</h2>
+  <ol>
+    <li>
+      <h3>Distance to the edge</h3>
+      <p>For each pixel of the card, the code measures how far it sits inside the rounded rectangle. Past the bezel width nothing moves, so the text area stays sharp.</p>
+    </li>
+    <li>
+      <h3>Shift inward</h3>
+      <p>Near the rim, each pixel takes its colour from a point further inside the card. The shift grows with the square of closeness to the edge, which reads as a curved glass lip.</p>
+    </li>
+    <li>
+      <h3>Split the colours</h3>
+      <p>Red is shifted a little more than green and blue a little less. That gives the faint prism fringe real glass shows at its edge.</p>
+    </li>
+    <li>
+      <h3>Tint and rim light</h3>
+      <p>A dark gradient keeps white text readable, and a 1px gradient border adds the highlight along the top and bottom edges.</p>
+    </li>
+  </ol>
+
+  <div class="limits">
+    <h3>Scope</h3>
+    <p>
+      The glass refracts the image you give it, which fits stat cards and captions over hero photos. Bending live page content
+      (text, video, scrolling sections) needs an SVG <code>backdrop-filter</code>, which only Chromium browsers support today.
+      Web output uses Canvas 2D; Flutter uses a fragment shader; SwiftUI uses a Metal <code>layerEffect</code>.
+    </p>
+  </div>
+</section>
+
+<style>
+  .about { display: flex; flex-direction: column; gap: 24px; border-top: 1px solid var(--line); padding-top: 32px; }
+  .about h2 { font-size: 28px; font-weight: 600; }
+  ol { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px 32px; }
+  li { counter-increment: step; display: flex; flex-direction: column; gap: 6px; }
+  li::before { content: counter(step); font: 12px var(--mono); color: var(--accent); }
+  h3 { font-size: 18px; font-weight: 600; }
+  p { margin: 0; color: var(--muted); font-size: 15px; }
+  .limits { background: var(--sunk); border-radius: var(--radius); padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; max-width: 86ch; }
+</style>
